@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import logo from './logo.svg';
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/Navbar';
@@ -9,24 +8,31 @@ import Details from './components/Details';
 import Cart from './components/Cart/';
 import Default from './components/Default';
 import Modal from './components/Modal';
+import Login from './components/Login';
+import Register from './components/Register';
+import { useRecoilValue } from 'recoil';
+import { _user } from './recoil';
 
-class App extends Component {
-  render() {
-    return (
-      <React.Fragment>
-        <Navbar />
-        <Switch>
-          <Route exact path="/" component={ProductList} />
-          <Route exact path="/details" component={Details} />
-          <Route exact path="/cart" component={Cart} />
-          <Route exact path="/register" component={Cart} />
-          <Route exact path="/login" component={Cart} />
-          <Route component={Default} />
-        </Switch>
-        <Modal />
-      </React.Fragment>
-    );
-  }
-}
+const App = (props) => {
+  return (
+    <>
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={ProductList} />
+        <PrivateRoute exact path="/details" component={Details} />
+        <PrivateRoute exact path="/cart" component={Cart} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/login" component={Login} />
+        <Route component={Default} />
+      </Switch>
+      <Modal />
+    </>
+  );
+};
+
+const PrivateRoute = (props) => {
+  const user = useRecoilValue(_user);
+  return user ? <Route {...props} /> : <Redirect to="/login" />;
+};
 
 export default App;

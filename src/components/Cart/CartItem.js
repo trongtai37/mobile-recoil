@@ -1,8 +1,17 @@
 import React from 'react';
+import { useSetRecoilState } from 'recoil';
+import {
+  _increaseProduct,
+  _decreaseProduct,
+  _removeProduct,
+} from '../../recoil';
 
-export default function CartItem({ item, value }) {
-  const { id, title, img, price, total, count } = item;
-  const { increment, decrement, removeItem } = value;
+const CartItem = ({ item }) => {
+  const { title, img, price, count } = item;
+  const total = price * count;
+  const increaseProduct = useSetRecoilState(_increaseProduct);
+  const decreaseProduct = useSetRecoilState(_decreaseProduct);
+  const removeProduct = useSetRecoilState(_removeProduct);
 
   return (
     <div className="row my-2 text-capitalize text-center">
@@ -25,12 +34,18 @@ export default function CartItem({ item, value }) {
       <div className="col-10 mx-auto col-lg-2 my-2 my-lg-0">
         <div className="d-flex justify-content-center">
           <div>
-            <span className="btn btn-black mx-1" onClick={() => decrement(id)}>
+            <span
+              className="btn btn-black mx-1"
+              onClick={() => decreaseProduct(item)}
+            >
               {' '}
               -
             </span>
             <span className="btn btn-black mx-1">{count}</span>
-            <span className="btn btn-black mx-1" onClick={() => increment(id)}>
+            <span
+              className="btn btn-black mx-1"
+              onClick={() => increaseProduct(item)}
+            >
               {' '}
               +
             </span>
@@ -38,7 +53,7 @@ export default function CartItem({ item, value }) {
         </div>
       </div>
       <div className="col-10 mx-auto col-lg-2">
-        <div className="cart-icon" onClick={() => removeItem(id)}>
+        <div className="cart-icon" onClick={() => removeProduct(item)}>
           <i className="fas fa-trash" />
         </div>
       </div>
@@ -47,4 +62,5 @@ export default function CartItem({ item, value }) {
       </div>
     </div>
   );
-}
+};
+export default CartItem;

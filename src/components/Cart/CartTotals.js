@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PayPalButton from './PayPalButton';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { _cart, _totalPrice } from '../../recoil';
 
-export default function CartTotals({ value, history }) {
-  const { cartSubTotal, cartTax, cartTotal, clearCart } = value;
+const CartTotals = (props) => {
+  const totalPrice = useRecoilValue(_totalPrice);
+  const setCart = useSetRecoilState(_cart);
   return (
-    <React.Fragment>
+    <>
       <div className="container">
         <div className="row">
           <div className="col-10 mt-2 ml-sm-5 ml-md-auto col-sm-8 text-capitalize text-right">
@@ -13,31 +15,27 @@ export default function CartTotals({ value, history }) {
               <button
                 className="btn btn-outline-danger text-uppercase mb-3 px-5"
                 type="button"
-                onClick={() => clearCart()}
+                onClick={() => setCart([])}
               >
                 clear cart
               </button>
             </Link>
             <h5>
               <span className="text-title">subtotal:</span>
-              <strong>${cartSubTotal}</strong>
+              <strong>${totalPrice}</strong>
             </h5>
             <h5>
               <span className="text-title">tax:</span>
-              <strong>${cartTax}</strong>
+              <strong>10%</strong>
             </h5>
             <h5>
               <span className="text-title">total:</span>
-              <strong>${cartTotal}</strong>
+              <strong>${totalPrice * 1.1}</strong>
             </h5>
-            <PayPalButton
-              total={cartTotal}
-              clearCart={clearCart}
-              history={history}
-            />
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
-}
+};
+export default CartTotals;

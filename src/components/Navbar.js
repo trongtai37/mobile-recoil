@@ -1,44 +1,53 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../logo.svg';
 import { ButtonContainer } from './Button';
-import styled from 'styled-components';
+import { _user } from '../recoil';
+import { useRecoilState } from 'recoil';
+import { useHistory } from 'react-router-dom';
 
-export default class Navbar extends Component {
-  render() {
-    return (
-      <nav className="navbar navbar-expand-sm bg-primary navbar-dark px-sm-5">
-        <Link to="/">
-          <img src={logo} alt="store" className="navbar-brand" />
-        </Link>
+const Navbar = (props) => {
+  const [user, setUser] = useRecoilState(_user);
+  const history = useHistory();
+  const logoutUser = () => {
+    setUser(null);
+    history.push('/');
+  };
 
-        <ul className="navbar-nav align-items-center">
-          <li className="nav-item ml-3">
-            <Link to="/" className="nav-link">
-              Products
-            </Link>
-          </li>
-        </ul>
+  return (
+    <nav className="navbar navbar-expand-sm bg-primary navbar-dark px-sm-5">
+      <Link to="/">
+        <img src={logo} alt="store" className="navbar-brand" />
+      </Link>
 
-        <Link className="ml-auto" to="/cart">
-          <ButtonContainer>
-            <span className="mr-2">
-              <i className="fas fa-cart-plus"></i>
-            </span>
-            my cart
-          </ButtonContainer>
+      <ul className="navbar-nav align-items-center">
+        <li className="nav-item ml-3">
+          <Link to="/" className="nav-link">
+            Products
+          </Link>
+        </li>
+      </ul>
+
+      <Link className="ml-auto" to="/cart">
+        <ButtonContainer>
+          <span className="mr-2">
+            <i className="fas fa-cart-plus"></i>
+          </span>
+          my cart
+        </ButtonContainer>
+      </Link>
+      {user ? (
+        <>
+          <ButtonContainer>{user && user.username}</ButtonContainer>
+          <ButtonContainer onClick={logoutUser}>log out</ButtonContainer>
+        </>
+      ) : (
+        <Link to="/login">
           <ButtonContainer>log in</ButtonContainer>
         </Link>
-      </nav>
-    );
-  }
-}
+      )}
+    </nav>
+  );
+};
 
-const NavbarWrapper = styled.nav`
-  background: var(--mainBlue);
-  .nav-link {
-    color: var(--mainWhite) !important;
-    font-size: 1.3rem;
-    text-transform: capitalize;
-  }
-`;
+export default Navbar;
