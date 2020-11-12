@@ -45,7 +45,7 @@ const Login = (props) => {
                 message: 'Email must be geater than 5 characters.',
               },
               pattern: {
-                value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
                 message: 'Email is wrong format.',
               },
             })}
