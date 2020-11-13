@@ -28,7 +28,7 @@ const Login = (props) => {
         Login
       </div>
       <form
-        style={{ width: 500, marginTop: 60 }}
+        style={{ width: 350, marginTop: 60 }}
         onSubmit={handleSubmit(loginUser)}
       >
         <div className="form-group">

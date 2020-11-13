@@ -53,11 +53,14 @@ export const _decreaseProduct = selector({
     const itemsOfCart = get(_cart);
     const foundProduct = itemsOfCart.find((item) => item.id === product.id);
     if (foundProduct.count > 1) {
-      itemsOfCart.map((product) => {
-        if (product.id === foundProduct.id)
-          return { ...product, count: product.count - 1 };
-        return product;
-      });
+      set(
+        _cart,
+        itemsOfCart.map((product) => {
+          if (product.id === foundProduct.id)
+            return { ...product, count: product.count - 1 };
+          return product;
+        })
+      );
     } else
       set(
         _cart,

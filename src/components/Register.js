@@ -21,7 +21,7 @@ const Register = () => {
         Register
       </div>
       <form
-        style={{ width: 500, marginTop: 60 }}
+        style={{ width: 350, marginTop: 60 }}
         onClick={handleSubmit(handleRegister)}
       >
         <div className="form-group">
