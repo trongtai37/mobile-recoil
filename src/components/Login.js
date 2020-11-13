@@ -28,7 +28,7 @@ const Login = (props) => {
         Login
       </div>
       <form
-        style={{ width: 500, marginTop: 60 }}
+        style={{ width: 350, marginTop: 60 }}
         onSubmit={handleSubmit(loginUser)}
       >
         <div className="form-group">
@@ -45,7 +45,7 @@ const Login = (props) => {
                 message: 'Email must be geater than 5 characters.',
               },
               pattern: {
-                value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+                value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
                 message: 'Email is wrong format.',
               },
             })}

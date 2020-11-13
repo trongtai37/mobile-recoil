@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { _cart, _totalPrice } from '../../recoil';
 
 const CartTotals = (props) => {
   const totalPrice = useRecoilValue(_totalPrice);
-  const setCart = useSetRecoilState(_cart);
+  const resetCart = useResetRecoilState(_cart);
   return (
     <>
       <div className="container">
@@ -15,7 +15,7 @@ const CartTotals = (props) => {
               <button
                 className="btn btn-outline-danger text-uppercase mb-3 px-5"
                 type="button"
-                onClick={() => setCart([])}
+                onClick={resetCart}
               >
                 clear cart
               </button>
@@ -30,7 +30,7 @@ const CartTotals = (props) => {
             </h5>
             <h5>
               <span className="text-title">total:</span>
-              <strong>${totalPrice * 1.1}</strong>
+              <strong>${(totalPrice * 1.1).toFixed(2)}</strong>
             </h5>
           </div>
         </div>

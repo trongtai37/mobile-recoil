@@ -21,7 +21,7 @@ const Register = () => {
         Register
       </div>
       <form
-        style={{ width: 500, marginTop: 60 }}
+        style={{ width: 350, marginTop: 60 }}
         onClick={handleSubmit(handleRegister)}
       >
         <div className="form-group">
@@ -38,7 +38,7 @@ const Register = () => {
                 message: 'Email must be geater than 5 characters.',
               },
               pattern: {
-                value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+                value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
                 message: 'Email is wrong format.',
               },
             })}

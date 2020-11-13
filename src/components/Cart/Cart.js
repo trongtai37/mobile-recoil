@@ -4,7 +4,7 @@ import CartColumns from './CartColumns';
 import EmptyCart from './EmptyCart';
 import CartList from './CartList';
 import CartTotals from './CartTotals';
-import { _cart, _increaseProduct, _decreaseProduct } from '../../recoil';
+import { _cart } from '../../recoil';
 import { useRecoilValue } from 'recoil';
 
 const Cart = (props) => {
