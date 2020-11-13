@@ -81,7 +81,7 @@ export const _removeProduct = selector({
 });
 
 export const _totalPrice = selector({
-  key: 'totalprice',
+  key: 'total-price',
   get: ({ get }) => {
     const itemsOfCart = get(_cart);
     return itemsOfCart.reduce(

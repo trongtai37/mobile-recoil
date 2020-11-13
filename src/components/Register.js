@@ -35,7 +35,7 @@ const Register = () => {
               required: 'Email is required.',
               minLength: {
                 value: 5,
-                message: 'Email must be geater than 5 characters.',
+                message: 'Email must be greater than 5 characters.',
               },
               pattern: {
                 value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
@@ -58,11 +58,11 @@ const Register = () => {
               required: 'Password is required.',
               minLength: {
                 value: 5,
-                message: 'Password must be geater than 5 characters.',
+                message: 'Password must be greater than 5 characters.',
               },
               maxLength: {
                 value: 16,
-                message: 'Password must be geater than 5 characters.',
+                message: 'Password must be greater than 5 characters.',
               },
             })}
           />

@@ -3,8 +3,13 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useSetRecoilState } from 'recoil';
-import { _increaseProduct, _modalProduct, _detailProduct } from '../recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+  _user,
+  _increaseProduct,
+  _modalProduct,
+  _detailProduct,
+} from '../recoil';
 
 const Product = (props) => {
   const history = useHistory();
@@ -13,6 +18,7 @@ const Product = (props) => {
     product,
   } = props;
 
+  const user = useRecoilValue(_user);
   const increaseProduct = useSetRecoilState(_increaseProduct);
   const setModalProduct = useSetRecoilState(_modalProduct);
   const setDetailProduct = useSetRecoilState(_detailProduct);
@@ -43,8 +49,10 @@ const Product = (props) => {
             className="cart-btn"
             disabled={inCart ? true : false}
             onClick={() => {
-              increaseProduct(product);
-              openModal(product);
+              if (user) {
+                increaseProduct(product);
+                openModal(product);
+              }
             }}
           >
             {inCart ? (
